@@ -9,13 +9,13 @@ const PORT = 3000;
 
 
 //Middleware
-// app.use(logReq);
+app.use(logReq);
 
 
-// function logReq(req, res, next){
-//     console.log(`${req.method} request made to '${req.url}'`);
-//     next();
-// }
+function logReq(req, res, next){
+    console.log(`${req.method} request made to '${req.url}'`);
+    next();
+}
 
 //Routes
 app
@@ -44,6 +44,9 @@ app
 });
 
 //Global Error Hardling Middleware
+app.use((err, req, res, next) =>{
+    res.status(500), send(err.message);
+});
 
 //Server Listener (3)
 app.listen(PORT, (req, res) => {
